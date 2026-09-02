@@ -42,17 +42,20 @@ header .header {
 
 .nav-sections ul {
   display: flex;
-  gap: 28px;
-  align-items: center;
+  gap: 24px;
+  list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.nav-sections li {
   list-style: none;
 }
 
 .nav-sections a {
+  text-decoration: none;
   color: #1f2937;
   font-weight: 600;
-  text-decoration: none;
 }
 
 .nav-sections a:hover,
