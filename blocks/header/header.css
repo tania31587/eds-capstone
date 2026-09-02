@@ -1,4 +1,5 @@
 header {
+  height: 72px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -29,9 +30,12 @@ header nav .section {
   padding: 0;
 }
 
-header .nav-brand p,
-header .nav-tools p {
+header .nav-brand p {
   margin: 0;
+  color: #174c36;
+  font-size: 1.35rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 header .nav-logo {
@@ -71,6 +75,25 @@ header .nav-tools {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+header .nav-tools ul {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+header .nav-tools li {
+  margin: 0;
+  list-style: none;
+}
+
+header .nav-tools a {
+  color: #174c36;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 header .nav-cart {
@@ -136,6 +159,10 @@ header .nav-hamburger span::after {
 }
 
 @media (width < 900px) {
+  header {
+    height: 64px;
+  }
+
   header .header {
     padding: 0 16px;
   }
