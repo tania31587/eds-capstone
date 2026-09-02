@@ -12,7 +12,11 @@ header .header {
   padding: 0 24px;
 }
 
-.header-nav {
+header .nav-wrapper {
+  width: 100%;
+}
+
+header nav {
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 32px;
@@ -20,57 +24,56 @@ header .header {
   min-height: 72px;
 }
 
-.header-nav .section {
+header nav .section {
   margin: 0;
   padding: 0;
 }
 
-.nav-logo {
+header .nav-brand p,
+header .nav-tools p {
+  margin: 0;
+}
+
+header .nav-logo {
   color: #174c36;
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
 }
 
-.nav-brand picture,
-.nav-brand img {
-  display: block;
-  width: auto;
-  height: 42px;
-}
-
-.nav-sections ul {
+header .nav-sections .default-content-wrapper > ul {
   display: flex;
-  gap: 24px;
-  list-style: none;
+  gap: 28px;
+  align-items: center;
   margin: 0;
   padding: 0;
-}
-
-.nav-sections li {
   list-style: none;
 }
 
-.nav-sections a {
-  text-decoration: none;
-  color: #1f2937;
-  font-weight: 600;
+header .nav-sections li {
+  margin: 0;
+  list-style: none;
 }
 
-.nav-sections a:hover,
-.nav-sections a:focus-visible {
+header .nav-sections a {
+  color: #1f2937;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+header .nav-sections a:hover,
+header .nav-sections a:focus-visible {
   color: #237a57;
 }
 
-.nav-tools {
+header .nav-tools {
   display: flex;
-  gap: 16px;
   align-items: center;
   justify-content: flex-end;
 }
 
-.nav-cart {
+header .nav-cart {
   display: inline-flex;
   gap: 8px;
   align-items: center;
@@ -79,28 +82,7 @@ header .header {
   text-decoration: none;
 }
 
-.nav-cart-icon {
-  position: relative;
-  width: 22px;
-  height: 18px;
-  border: 2px solid currentcolor;
-  border-top: 0;
-  border-radius: 2px;
-}
-
-.nav-cart-icon::before {
-  position: absolute;
-  top: -7px;
-  left: 3px;
-  width: 12px;
-  height: 8px;
-  border-top: 2px solid currentcolor;
-  border-left: 2px solid currentcolor;
-  content: "";
-  transform: skew(15deg);
-}
-
-.nav-cart-count {
+header .nav-cart-count {
   display: inline-grid;
   min-width: 22px;
   height: 22px;
@@ -113,8 +95,11 @@ header .header {
   border-radius: 999px;
 }
 
-.nav-hamburger {
+header .nav-hamburger {
   display: none;
+}
+
+header .nav-hamburger button {
   padding: 8px;
   color: #174c36;
   background: transparent;
@@ -122,69 +107,68 @@ header .header {
   cursor: pointer;
 }
 
-.nav-hamburger span,
-.nav-hamburger span::before,
-.nav-hamburger span::after {
+header .nav-hamburger span,
+header .nav-hamburger span::before,
+header .nav-hamburger span::after {
   display: block;
   width: 24px;
   height: 2px;
   background-color: currentcolor;
 }
 
-.nav-hamburger span {
+header .nav-hamburger span {
   position: relative;
 }
 
-.nav-hamburger span::before,
-.nav-hamburger span::after {
+header .nav-hamburger span::before,
+header .nav-hamburger span::after {
   position: absolute;
   left: 0;
   content: "";
 }
 
-.nav-hamburger span::before {
+header .nav-hamburger span::before {
   top: -7px;
 }
 
-.nav-hamburger span::after {
+header .nav-hamburger span::after {
   top: 7px;
 }
 
-@media (width < 768px) {
+@media (width < 900px) {
   header .header {
     padding: 0 16px;
   }
 
-  .header-nav {
-    grid-template-columns: 1fr auto;
+  header nav {
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
     min-height: 64px;
   }
 
-  .nav-hamburger {
+  header .nav-hamburger {
+    display: block;
+  }
+
+  header .nav-sections {
     position: absolute;
-    top: 20px;
-    right: 60px;
-    display: block;
-  }
-
-  .nav-sections {
+    top: 64px;
+    right: 0;
+    left: 0;
     display: none;
-    grid-column: 1 / -1;
-  }
-
-  .header-nav.nav-open .nav-sections {
-    display: block;
-    padding: 16px 0;
+    padding: 20px 16px;
+    background-color: #fff;
     border-top: 1px solid #e5e7eb;
+    box-shadow: 0 12px 20px rgb(0 0 0 / 10%);
   }
 
-  .nav-sections ul {
+  header nav[aria-expanded="true"] .nav-sections {
+    display: block;
+  }
+
+  header .nav-sections .default-content-wrapper > ul {
     align-items: flex-start;
     flex-direction: column;
     gap: 16px;
-  }
-
-  .nav-cart-label {
-    display: none;
   }
 }
