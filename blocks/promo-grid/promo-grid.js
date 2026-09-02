@@ -1,48 +1,18 @@
 export default function decorate(block) {
-  const list = document.createElement('ul');
-  list.className = 'promo-grid-list';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'promo-grid-wrapper';
 
   [...block.children].forEach((row) => {
-    const cells = [...row.children];
-    const image = row.querySelector('picture');
-    const heading = row.querySelector('h2, h3, h4');
-    const description = [...row.querySelectorAll('p')]
-      .find((paragraph) => !paragraph.querySelector('a'));
-    const link = row.querySelector('a');
+    const card = document.createElement('div');
+    card.className = 'promo-card';
 
-    const item = document.createElement('li');
-    item.className = 'promo-card';
+    [...row.children].forEach((cell) => {
+      card.append(cell.cloneNode(true));
+    });
 
-    if (image) {
-      const media = document.createElement('div');
-      media.className = 'promo-card-media';
-      media.append(image);
-      item.append(media);
-    }
-
-    const content = document.createElement('div');
-    content.className = 'promo-card-content';
-
-    if (heading) {
-      content.append(heading);
-    }
-
-    if (description) {
-      content.append(description);
-    }
-
-    if (link) {
-      link.classList.add('promo-card-link');
-      content.append(link);
-    }
-
-    item.append(content);
-    list.append(item);
-
-    cells.forEach((cell) => cell.remove());
-    row.remove();
+    wrapper.append(card);
   });
 
   block.textContent = '';
-  block.append(list);
+  block.append(wrapper);
 }
