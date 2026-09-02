@@ -1,20 +1,45 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
-/**
- * loads and decorates the footer
- * @param {Element} block The footer block element
- */
+function updateCopyrightYear(container) {
+  const currentYear = String(new Date().getFullYear());
+
+  container.querySelectorAll('p').forEach((paragraph) => {
+    if (paragraph.textContent.includes('{year}')) {
+      paragraph.textContent = paragraph.textContent.replace(
+        '{year}',
+        currentYear,
+      );
+    }
+  });
+}
+
 export default async function decorate(block) {
-  // load footer as fragment
-  const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+  const footerMetadata = getMetadata('footer');
+  const footerPath = footerMetadata
+    ? new URL(footerMetadata, window.location).pathname
+    : '/footer';
+
   const fragment = await loadFragment(footerPath);
 
-  // decorate footer DOM
   block.textContent = '';
-  const footer = document.createElement('div');
-  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
-  block.append(footer);
+  const footerContent = document.createElement('div');
+  footerContent.className = 'footer-content';
+
+  while (fragment.firstElementChild) {
+    footerContent.append(fragment.firstElementChild);
+  }
+
+  footerContent.querySelectorAll('a').forEach((link) => {
+    const url = new URL(link.href, window.location.origin);
+
+    if (url.origin !== window.location.origin) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
+  });
+
+  updateCopyrightYear(footerContent);
+  block.append(footerContent);
 }

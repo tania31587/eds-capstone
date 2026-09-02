@@ -1,272 +1,187 @@
-/* header and nav layout */
-header .nav-wrapper {
-  background-color: var(--background-color);
-  width: 100%;
-  z-index: 2;
-  position: fixed;
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #fff;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-header nav {
-  box-sizing: border-box;
-  display: grid;
-  grid-template:
-    'hamburger brand tools' var(--nav-height)
-    'sections sections sections' 1fr / auto 1fr auto;
-  align-items: center;
-  gap: 0 24px;
-  margin: auto;
-  max-width: 1248px;
-  height: var(--nav-height);
+header .header {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 24px;
-  font-family: var(--body-font-family);
 }
 
-header nav[aria-expanded='true'] {
-  grid-template:
-    'hamburger brand' var(--nav-height)
-    'sections sections' 1fr
-    'tools tools' var(--nav-height) / auto 1fr;
-  overflow-y: auto;
-  min-height: 100dvh;
-}
-
-@media (width >= 900px) {
-  header .nav-wrapper {
-    position: relative;
-  }
-
-  header nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 0 32px;
-    max-width: 1264px;
-    padding: 0 32px;
-  }
-
-  header nav[aria-expanded='true'] {
-    min-height: 0;
-    overflow: visible;
-  }
-}
-
-header nav p {
-  margin: 0;
-  line-height: 1;
-}
-
-header nav a:any-link {
-  color: currentcolor;
-}
-
-/* hamburger */
-header nav .nav-hamburger {
-  grid-area: hamburger;
-  height: 22px;
-  display: flex;
+.header-nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 32px;
   align-items: center;
+  min-height: 72px;
 }
 
-header nav .nav-hamburger button {
-  height: 22px;
+.header-nav .section {
   margin: 0;
-  border: 0;
-  border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
-  color: inherit;
-  overflow: initial;
-  text-overflow: initial;
-  white-space: initial;
 }
 
-header nav .nav-hamburger-icon,
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  box-sizing: border-box;
+.nav-logo {
+  color: #174c36;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-brand picture,
+.nav-brand img {
   display: block;
+  width: auto;
+  height: 42px;
+}
+
+.nav-sections ul {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-sections a {
+  color: #1f2937;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-sections a:hover,
+.nav-sections a:focus-visible {
+  color: #237a57;
+}
+
+.nav-tools {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-cart {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: #174c36;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-cart-icon {
   position: relative;
-  width: 20px;
-}
-
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  content: '';
-  position: absolute;
-  background: currentcolor;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon,
-header nav[aria-expanded='false'] .nav-hamburger-icon::before,
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  height: 2px;
+  width: 22px;
+  height: 18px;
+  border: 2px solid currentcolor;
+  border-top: 0;
   border-radius: 2px;
-  background: currentcolor;
 }
 
-header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
+.nav-cart-icon::before {
+  position: absolute;
+  top: -7px;
+  left: 3px;
+  width: 12px;
+  height: 8px;
+  border-top: 2px solid currentcolor;
+  border-left: 2px solid currentcolor;
+  content: "";
+  transform: skew(15deg);
 }
 
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon {
+.nav-cart-count {
+  display: inline-grid;
+  min-width: 22px;
   height: 22px;
+  padding: 0 5px;
+  place-items: center;
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1;
+  background-color: #237a57;
+  border-radius: 999px;
 }
 
-header nav[aria-expanded='true'] .nav-hamburger-icon::before,
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: 3px;
-  left: 1px;
-  transform: rotate(45deg);
-  transform-origin: 2px 1px;
+.nav-hamburger {
+  display: none;
+  padding: 8px;
+  color: #174c36;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.nav-hamburger span,
+.nav-hamburger span::before,
+.nav-hamburger span::after {
+  display: block;
   width: 24px;
   height: 2px;
-  border-radius: 2px;
+  background-color: currentcolor;
 }
 
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: unset;
-  bottom: 3px;
-  transform: rotate(-45deg);
+.nav-hamburger span {
+  position: relative;
 }
 
-@media (width >= 900px) {
-  header nav .nav-hamburger {
-    display: none;
-    visibility: hidden;
+.nav-hamburger span::before,
+.nav-hamburger span::after {
+  position: absolute;
+  left: 0;
+  content: "";
+}
+
+.nav-hamburger span::before {
+  top: -7px;
+}
+
+.nav-hamburger span::after {
+  top: 7px;
+}
+
+@media (width < 768px) {
+  header .header {
+    padding: 0 16px;
   }
-}
 
-/* brand */
-header .nav-brand {
-  grid-area: brand;
-  flex-basis: 128px;
-  font-size: var(--heading-font-size-s);
-  font-weight: 700;
-  line-height: 1;
-}
+  .header-nav {
+    grid-template-columns: 1fr auto;
+    min-height: 64px;
+  }
 
-header nav .nav-brand img {
-  width: 128px;
-  height: auto;
-}
-
-/* sections */
-header nav .nav-sections {
-  grid-area: sections;
-  flex: 1 1 auto;
-  display: none;
-  visibility: hidden;
-}
-
-header nav[aria-expanded='true'] .nav-sections {
-  display: block;
-  visibility: visible;
-  align-self: start;
-}
-
-header nav .nav-sections ul {
-  list-style: none;
-  padding-left: 0;
-  font-size: var(--body-font-size-s);
-}
-
-header nav .nav-sections ul > li {
-  font-weight: 500;
-}
-
-header nav .nav-sections ul > li > ul {
-  margin-top: 0;
-}
-
-header nav .nav-sections ul > li > ul > li {
-  font-weight: 400;
-}
-
-@media (width >= 900px) {
-  header nav .nav-sections {
+  .nav-hamburger {
+    position: absolute;
+    top: 20px;
+    right: 60px;
     display: block;
-    visibility: visible;
-    white-space: nowrap;
   }
 
-  header nav[aria-expanded='true'] .nav-sections {
-    align-self: unset;
-  }
-
-  header nav .nav-sections .nav-drop {
-    position: relative;
-    padding-right: 16px;
-    cursor: pointer;
-  }
-
-  header nav .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 0.5em;
-    right: 2px;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.5em;
-    transform: rotate(315deg);
-  }
-
-  header nav .nav-sections ul {
-    display: flex;
-    gap: 24px;
-    margin: 0;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    flex: 0 1 auto;
-    position: relative;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+  .nav-sections {
     display: none;
-    position: relative;
+    grid-column: 1 / -1;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
+  .header-nav.nav-open .nav-sections {
     display: block;
-    position: absolute;
-    left: -24px;
-    width: 200px;
-    top: 150%;
-    padding: 16px;
-    background-color: var(--light-color);
-    white-space: initial;
+    padding: 16px 0;
+    border-top: 1px solid #e5e7eb;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 16px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+  .nav-sections ul {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    padding: 8px 0;
+  .nav-cart-label {
+    display: none;
   }
-}
-
-/* tools */
-header nav .nav-tools {
-  grid-area: tools;
 }
