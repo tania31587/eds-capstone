@@ -303,8 +303,12 @@ main > .section {
 main > .section > div {
   width: 100%;
   max-width: 1200px;
-  margin: auto;
-  padding: 0 24px;
+  margin-inline: auto;;
+  box-sizing: border-box;
+}
+
+main > .hero-container > div {
+  max-width: none;
 }
 
 main > .section:first-of-type {
