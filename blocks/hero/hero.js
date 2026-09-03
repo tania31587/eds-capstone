@@ -1,8 +1,12 @@
 export default function decorate(block) {
-  const picture = block.querySelector('picture');
-  const heading = block.querySelector('h1, h2');
-  const paragraphs = [...block.querySelectorAll('p')];
-  const cta = block.querySelector('a');
+  const rows = [...block.children];
+
+  const picture = rows[0]?.querySelector('picture');
+  const titleSource = rows[1]?.querySelector('h1, h2, h3')
+    || rows[1]?.firstElementChild;
+  const descriptionSource = rows[2]?.querySelector('p')
+    || rows[2]?.firstElementChild;
+  const ctaSource = rows[3]?.querySelector('a');
 
   const hero = document.createElement('section');
   hero.className = 'hero-layout';
@@ -18,20 +22,24 @@ export default function decorate(block) {
   const content = document.createElement('div');
   content.className = 'hero-content';
 
-  if (heading) {
-    heading.id = 'home-hero-title';
-    content.append(heading);
+  if (titleSource) {
+    const title = document.createElement('h1');
+    title.id = 'home-hero-title';
+    title.className = 'hero-title';
+    title.textContent = titleSource.textContent.trim();
+    content.append(title);
   }
 
-  const subtitle = paragraphs.find((paragraph) => !paragraph.contains(cta));
-
-  if (subtitle) {
-    subtitle.classList.add('hero-subtitle');
-    content.append(subtitle);
+  if (descriptionSource) {
+    const description = document.createElement('p');
+    description.className = 'hero-description';
+    description.textContent = descriptionSource.textContent.trim();
+    content.append(description);
   }
 
-  if (cta) {
-    cta.classList.add('hero-cta');
+  if (ctaSource) {
+    const cta = ctaSource.cloneNode(true);
+    cta.className = 'hero-cta';
     content.append(cta);
   }
 
