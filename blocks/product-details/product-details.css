@@ -5,8 +5,8 @@
 
 .product-details-title {
   font-size: 3rem;
-  font-weight: 700;
-  margin: 0;
+  line-height: 1;
+  margin-bottom: 16px;
 }
 
 .product-details-price {
@@ -21,10 +21,20 @@
 
 .product-details-link {
   display: inline-flex;
+  padding: 14px 28px;
   background: #000;
   color: #fff;
-  padding: 14px 26px;
-  border-radius: 999px;
   text-decoration: none;
-  width: fit-content;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.product-pdp-layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
 }

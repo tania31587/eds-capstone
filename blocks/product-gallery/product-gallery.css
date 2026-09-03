@@ -12,5 +12,7 @@
 
 .product-gallery-main img {
   width: 100%;
-  border-radius: 16px;
+  height: 650px;
+  object-fit: cover;
+  border-radius: 12px;
 }
