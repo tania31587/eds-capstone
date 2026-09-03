@@ -90,6 +90,12 @@
   content: "→";
 }
 
+.category-grid.featured {
+  padding: 32px;
+  background-color: #f5f7f4;
+  border-radius: 24px;
+}
+
 @media (width < 900px) {
   .category-grid .category-grid-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
