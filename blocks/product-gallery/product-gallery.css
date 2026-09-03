@@ -1,0 +1,16 @@
+.product-gallery {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 20px;
+}
+
+.product-gallery-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-gallery-main img {
+  width: 100%;
+  border-radius: 16px;
+}

@@ -1,0 +1,13 @@
+.product-specs table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-specs td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.product-specs td:first-child {
+  font-weight: 600;
+}
