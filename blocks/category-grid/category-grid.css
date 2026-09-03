@@ -25,7 +25,9 @@
 }
 
 .category-grid-list {
-  align-items: stretch;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(300px,1fr));
+  gap:32px;
 }
 
 .category-product-card {
