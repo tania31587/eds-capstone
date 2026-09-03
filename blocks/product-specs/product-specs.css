@@ -4,11 +4,11 @@
 }
 
 .product-specs td {
-  padding: 14px;
-  border-bottom: 1px solid #e6e6e6;
+  padding: 16px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .product-specs td:first-child {
+  width: 250px;
   font-weight: 700;
-  width: 220px;
 }
