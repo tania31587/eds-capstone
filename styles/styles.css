@@ -329,9 +329,9 @@ main .section.highlight {
 
 .product-pdp-layout {
   display: grid;
-  grid-template-columns: 1fr 450px;
-  gap: 60px;
-  max-width: 1200px;
+  grid-template-columns: minmax(500px, 55%) minmax(400px, 45%);
+  gap: 64px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 60px 24px;
 }

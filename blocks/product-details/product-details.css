@@ -8,6 +8,7 @@
   font-size: 3rem;
   font-weight: 700;
   line-height: 1;
+  margin: 0;
 }
 
 .product-details-sku {
@@ -23,11 +24,12 @@
 }
 
 .product-details-description {
-  line-height: 1.8;
+  line-height: 1.7;
   color: #555;
 }
 
 .product-details-features {
+  margin-top: 16px;
   padding-left: 18px;
 }
 
@@ -36,13 +38,11 @@
 }
 
 .product-details-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 30px;
-  background: #7DFF4F;
+  background: #75ff4a;
   color: #111;
+  padding: 14px 28px;
   border-radius: 999px;
   text-decoration: none;
   font-weight: 700;
+  display: inline-flex;
 }
