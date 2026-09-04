@@ -9,7 +9,7 @@
 }
 
 .product-details-title {
-  font-size: 3rem;
+  font-size: 3.5rem;
   line-height: 1;
   margin-bottom: 16px;
 }
@@ -21,8 +21,12 @@
 }
 
 .product-details-description {
+  max-width: 500px;
   line-height: 1.7;
-  color: #555;
+}
+
+.product-details {
+  gap: 20px;
 }
 
 .product-details-features li::before {

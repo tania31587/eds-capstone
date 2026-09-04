@@ -1,6 +1,6 @@
 .product-gallery {
   display: grid;
-  grid-template-columns: 90px 1fr;
+  grid-template-columns: 90px minmax(500px, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -29,5 +29,4 @@
   height: 650px;
   object-fit: cover;
   border-radius: 16px;
-  display: block;
 }

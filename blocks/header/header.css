@@ -17,12 +17,35 @@ header .nav-wrapper {
   width: 100%;
 }
 
-header nav {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 32px;
+.header-nav {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
   min-height: 72px;
+}
+
+.nav-brand {
+  flex: 0 0 auto;
+}
+
+.nav-sections {
+  display: flex;
+  gap: 32px;
+  margin-left: 60px;
+}
+
+.nav-sections a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #17231e;
+  font-weight: 600;
+}
+
+.nav-tools {
+  margin-left: auto;
 }
 
 header nav .section {

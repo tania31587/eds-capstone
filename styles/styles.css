@@ -142,6 +142,10 @@ pre {
   white-space: pre;
 }
 
+main {
+  width: 100%;
+}
+
 main > div {
   margin: 40px 16px;
 }
@@ -302,7 +306,8 @@ main > .section {
 }
 
 main > .section > div {
-  max-width: 1400px;
+  max-width: 1320px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -349,7 +354,7 @@ main .section:first-of-type {
   display: grid;
   grid-template-columns: minmax(500px, 55%) minmax(400px, 45%);
   gap: 64px;
-  max-width: 1300px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 60px 24px;
 }
