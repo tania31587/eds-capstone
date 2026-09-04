@@ -1,0 +1,8 @@
+.product-pdp-layout {
+  display: grid;
+  grid-template-columns: minmax(500px, 55%) minmax(400px, 45%);
+  gap: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
