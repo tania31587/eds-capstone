@@ -1,5 +1,4 @@
 .related-products-list {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
 }

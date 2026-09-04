@@ -335,3 +335,24 @@ main .section.highlight {
   margin: 0 auto;
   padding: 60px 24px;
 }
+
+.products main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.pdp-top-section {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  gap: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 50px 24px;
+}
+
+@media (width < 900px) {
+  .pdp-top-section {
+    grid-template-columns: 1fr;
+  }
+}
