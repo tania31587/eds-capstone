@@ -46,6 +46,12 @@ header .nav-logo {
   white-space: nowrap;
 }
 
+header .nav-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 header .nav-sections .default-content-wrapper > ul {
   display: flex;
   gap: 28px;
@@ -66,15 +72,15 @@ header .nav-sections a {
   text-decoration: none;
 }
 
+header .nav-tools a {
+  color: #174c36;
+  font-weight: 700;
+  text-decoration: none;
+}
+
 header .nav-sections a:hover,
 header .nav-sections a:focus-visible {
   color: #237a57;
-}
-
-header .nav-tools {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
 }
 
 header .nav-tools ul {
@@ -88,12 +94,6 @@ header .nav-tools ul {
 header .nav-tools li {
   margin: 0;
   list-style: none;
-}
-
-header .nav-tools a {
-  color: #174c36;
-  font-weight: 700;
-  text-decoration: none;
 }
 
 header .nav-cart {

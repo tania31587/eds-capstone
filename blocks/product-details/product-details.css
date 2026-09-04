@@ -62,14 +62,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   background: #7dff4f;
   color: #111;
-
   padding: 14px 30px;
-
   border-radius: 999px;
-
   text-decoration: none;
   font-weight: 700;
 }

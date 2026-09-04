@@ -328,6 +328,15 @@ main .section.highlight {
   padding: 40px 0;
 }
 
+.section:first-of-type {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  gap: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
+
 main .section:first-of-type {
   display: grid;
   grid-template-columns: 55% 45%;
@@ -369,14 +378,4 @@ main .section:first-of-type {
 .product-gallery-container,
 .product-details-container {
   margin: 0;
-}
-
-.section:first-of-type {
-  display: grid;
-  grid-template-columns: 55% 45%;
-  gap: 60px;
-
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 60px 24px;
 }
