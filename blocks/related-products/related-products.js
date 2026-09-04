@@ -1,16 +1,22 @@
-function createCard(product) {
-  const card = document.createElement('article');
-  card.className = 'product-card';
+export default function decorate(block) {
+  const list = document.createElement('div');
+  list.className = 'related-products-list';
 
-  card.innerHTML = `
-    <div class="product-card-content">
-      <h3>${product.name}</h3>
-      <p class="product-card-sku">${product.sku}</p>
-      <p class="product-card-price">${product.price}</p>
-      <p>${product.description}</p>
-      ${product.link}View Product</a>
-    </div>
-  `;
+  [...block.children].forEach((row) => {
+    const card = document.createElement('article');
+    card.className = 'product-card';
+    const content = document.createElement('div');
+    content.className = 'product-card-content';
 
-  return card;
+    [...row.children].forEach((cell) => {
+      while (cell.firstElementChild) content.append(cell.firstElementChild);
+    });
+
+    if (content.childElementCount) {
+      card.append(content);
+      list.append(card);
+    }
+  });
+
+  block.replaceChildren(list);
 }
