@@ -17,6 +17,23 @@
   padding: 18px;
 }
 
+.related-products .product-card-media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: #f4f4f2;
+}
+
+.related-products .product-card-media picture,
+.related-products .product-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.related-products .product-card-media img {
+  object-fit: cover;
+}
+
 .related-products .product-card h3,
 .related-products .product-card p {
   margin: 0;
@@ -25,6 +42,12 @@
 .related-products .product-card h3 {
   color: #17231e;
   font-size: 1.1rem;
+}
+
+.related-products .product-card p {
+  color: #58645d;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .related-products .product-card a {
