@@ -297,11 +297,12 @@ main img {
 
 /* sections */
 main > .section {
+  width: 100%;
   margin: 40px 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -325,6 +326,14 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+main .section:first-of-type {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  gap: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .product-pdp-layout {
@@ -355,4 +364,19 @@ main .section.highlight {
   .pdp-top-section {
     grid-template-columns: 1fr;
   }
+}
+
+.product-gallery-container,
+.product-details-container {
+  margin: 0;
+}
+
+.section:first-of-type {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  gap: 60px;
+
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 24px;
 }
