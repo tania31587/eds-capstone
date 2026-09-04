@@ -1,5 +1,12 @@
 .related-products-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
   gap: 24px;
+}
+
+.related-products .product-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 8%);
 }
