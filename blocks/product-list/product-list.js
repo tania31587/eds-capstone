@@ -14,6 +14,24 @@ function splitValues(value = '') {
   return value.split(',').map((item) => item.trim()).filter(Boolean);
 }
 
+function sheetUrlFor(source) {
+  const sheetPath = source.replace(/\.json$|\/$/, '');
+  if (/^https?:\/\//.test(sheetPath) || sheetPath.startsWith('/')) return `${sheetPath}.json`;
+  return `/${toSlug(sheetPath)}.json`;
+}
+
+function normalizeProduct(product) {
+  return Object.fromEntries(
+    Object.entries(product).map(([key, value]) => [toSlug(key).replace(/-/g, ''), value]),
+  );
+}
+
+function categoryTitle(category) {
+  if (category === 'shop') return 'Shop';
+  if (category) return `${category[0].toUpperCase()}${category.slice(1)}`;
+  return 'Products';
+}
+
 function createElement(tag, className, text) {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -88,7 +106,7 @@ function createFilterGroup(label, field, products, filters, onChange) {
 
 export default async function decorate(block) {
   const source = block.querySelector('a')?.getAttribute('href') || block.textContent.trim() || '/products';
-  const sheetUrl = `${source.replace(/\.json$|\/$/, '')}.json`;
+  const sheetUrl = sheetUrlFor(source);
   block.replaceChildren(createElement('p', 'product-list-status', 'Loading products...'));
 
   try {
@@ -96,14 +114,16 @@ export default async function decorate(block) {
     if (!response.ok) throw new Error(`Unable to load ${sheetUrl}`);
     const { data = [] } = await response.json();
     const category = toSlug(window.location.pathname.split('/').pop());
-    const products = data.filter((product) => !category || category === 'shop' || toSlug(product.category) === category);
+    const products = data
+      .map(normalizeProduct)
+      .filter((product) => !category || category === 'shop' || toSlug(product.category) === category);
     const filters = new Map();
     const layout = createElement('div', 'product-list-layout');
     const sidebar = createElement('aside', 'product-list-filters');
     sidebar.append(createElement('h2', '', 'Filters'));
     const results = createElement('div', 'product-list-results');
     const heading = createElement('div', 'product-list-heading');
-    const title = createElement('h1', '', category === 'shop' ? 'Shop' : category ? `${category[0].toUpperCase()}${category.slice(1)}` : 'Products');
+    const title = createElement('h1', '', categoryTitle(category));
     const count = createElement('p', 'product-list-count');
     heading.append(title, count);
     const grid = createElement('div', 'product-list-grid');
