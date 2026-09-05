@@ -1,6 +1,7 @@
 footer {
-  color: #eaf5ef;
-  background-color: #123c2d;
+  color: #17231e;
+  background-color: #fff;
+  border-top: 1px solid #e2e6e3;
 }
 
 footer .footer {
@@ -52,6 +53,96 @@ footer .footer {
   color: #d7ede2;
 }
 
+.storefront-footer {
+  padding: 48px 24px 28px;
+}
+
+.storefront-footer-main {
+  display: grid;
+  grid-template-columns: minmax(240px, 2.4fr) repeat(4, minmax(100px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto 38px;
+}
+
+.storefront-footer-main section,
+.storefront-footer-contact {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.storefront-footer h2,
+.storefront-footer h3,
+.storefront-footer p {
+  margin: 0;
+}
+
+.storefront-footer h2 {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.storefront-footer h3 {
+  font-size: 0.8rem;
+}
+
+footer .footer .storefront-footer a {
+  color: #26342c;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+footer .footer .storefront-footer-contact a {
+  font-size: 1rem;
+}
+
+footer .footer .storefront-footer a:hover,
+footer .footer .storefront-footer a:focus-visible {
+  text-decoration: underline;
+}
+
+.storefront-footer-bottom {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: end;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.storefront-footer-social,
+.storefront-footer-payments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+footer .footer .storefront-footer .storefront-footer-social a {
+  padding: 3px 0;
+  font-weight: 700;
+}
+
+.storefront-footer-bottom p {
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.storefront-footer-payments {
+  justify-content: end;
+}
+
+.storefront-footer-payments span {
+  padding: 3px 5px;
+  color: #1d2a22;
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1;
+  border: 1px solid #cbd2cd;
+  border-radius: 3px;
+}
+
 @media (width < 768px) {
   footer .footer {
     padding: 36px 16px 20px;
@@ -60,5 +151,27 @@ footer .footer {
   .footer-content {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+
+  .storefront-footer {
+    padding: 36px 16px 22px;
+  }
+
+  .storefront-footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 20px;
+  }
+
+  .storefront-footer-contact {
+    grid-column: 1 / -1;
+  }
+
+  .storefront-footer-bottom {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .storefront-footer-payments {
+    justify-content: start;
   }
 }

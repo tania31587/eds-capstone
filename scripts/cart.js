@@ -1,4 +1,5 @@
 const CART_KEY = 'greenleaf-cart';
+const SHIPPING_KEY = 'greenleaf-shipping';
 
 function readCart() {
   try {
@@ -20,10 +21,24 @@ export function getItems() {
   return readCart();
 }
 
+export function getShipping() {
+  try {
+    return JSON.parse(localStorage.getItem(SHIPPING_KEY)) || { method: 'standard', cost: 99 };
+  } catch {
+    return { method: 'standard', cost: 99 };
+  }
+}
+
 export function getTotals(items = getItems()) {
   const quantity = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-  return { quantity, subtotal, total: subtotal };
+  const shipping = getShipping().cost;
+  return {
+    quantity,
+    subtotal,
+    shipping,
+    total: subtotal + shipping,
+  };
 }
 
 function writeCart(items) {
@@ -52,6 +67,11 @@ export function updateQty(sku, quantity) {
     item.quantity = quantity;
     writeCart(items);
   }
+}
+
+export function updateShipping(shipping) {
+  localStorage.setItem(SHIPPING_KEY, JSON.stringify(shipping));
+  window.dispatchEvent(new CustomEvent('cart:updated', { detail: getTotals() }));
 }
 
 export { formatPrice };

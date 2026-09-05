@@ -61,7 +61,7 @@ function renderCart(block) {
   const totals = getTotals(items);
   const summary = document.createElement('aside');
   summary.className = 'cart-summary';
-  summary.innerHTML = `<h2>Order Summary</h2><p><span>Subtotal</span><strong>${formatPrice(totals.subtotal)}</strong></p><p><span>Discount</span><span>₹0</span></p><p><span>Shipping</span><span>Calculated at checkout</span></p><p class="cart-total"><span>Total</span><strong>${formatPrice(totals.total)}</strong></p>`;
+  summary.innerHTML = `<h2>Order Summary</h2><p><span>Subtotal</span><strong>${formatPrice(totals.subtotal)}</strong></p><p><span>Discount</span><span>₹0</span></p><p><span>Shipping</span><span>${formatPrice(totals.shipping)}</span></p><p class="cart-total"><span>Total</span><strong>${formatPrice(totals.total)}</strong></p>`;
   const continueShopping = document.createElement('a');
   continueShopping.className = 'cart-continue-shopping';
   continueShopping.href = '/pages/category/shop';
