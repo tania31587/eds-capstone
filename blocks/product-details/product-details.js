@@ -1,3 +1,5 @@
+import { addItem } from '../../scripts/cart.js';
+
 function classifyContent(element, text) {
   if (/^(₹|\$|€|£)\s?\d/.test(text)) element.classList.add('product-details-price');
   if (/^sku[:\s]|^[A-Z]+-[A-Z0-9-]+$/i.test(text)) element.classList.add('product-details-sku');
@@ -35,4 +37,20 @@ export default function decorate(block) {
   });
 
   block.replaceChildren(content);
+
+  const addToCart = block.querySelector('.product-details-link');
+  if (!addToCart) return;
+
+  addToCart.addEventListener('click', (event) => {
+    event.preventDefault();
+    const product = {
+      sku: block.querySelector('.product-details-sku')?.textContent.trim() || window.location.pathname,
+      name: block.querySelector('.product-details-title')?.textContent.trim() || document.title,
+      price: block.querySelector('.product-details-price')?.textContent.trim() || '₹0',
+      image: block.closest('.section')?.querySelector('.product-gallery-main img')?.src || '',
+    };
+    addItem(product);
+    addToCart.textContent = 'Added to Cart';
+    setTimeout(() => { addToCart.textContent = 'Add to Cart'; }, 1600);
+  });
 }

@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { getTotals } from '../../scripts/cart.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -51,6 +52,17 @@ function openOnKeydown(e) {
 
 function focusNavSection() {
   document.activeElement.addEventListener('keydown', openOnKeydown);
+}
+
+function decorateCartLink(nav) {
+  const cartLink = [...nav.querySelectorAll('a')].find((link) => /cart/i.test(link.textContent));
+  if (!cartLink) return;
+  const count = document.createElement('span');
+  count.className = 'nav-cart-count';
+  cartLink.append(count);
+  const updateCount = () => { count.textContent = getTotals().quantity; };
+  updateCount();
+  window.addEventListener('cart:updated', updateCount);
 }
 
 /**
@@ -189,4 +201,5 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+  decorateCartLink(nav);
 }
