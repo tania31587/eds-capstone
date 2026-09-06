@@ -12,18 +12,18 @@
 }
 
 .dynamic-category {
-  max-width: 1400px;
-  margin: 0 auto;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .dynamic-category-header {
-  margin-bottom: 48px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 48px;
+    padding-bottom: 20px;
 }
 
 .dynamic-category-eyebrow {
-    margin: 0 0 8px;
+    margin-bottom: 10px;
     color: #488034;
     font-size: 0.8rem;
     font-weight: 800;
@@ -32,22 +32,23 @@
 }
 
 .dynamic-category-header h1 {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1.1;
+    margin: 0;
+    font-size: 56px;
+    line-height: 1;
+    font-weight: 700;
 }
 
 .dynamic-category-count {
-  margin: 0;
-  color: #666;
-  font-size: 14px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #666;
 }
 
 .dynamic-category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
 }
 
 .dynamic-category-item {
@@ -250,4 +251,10 @@
     .catalog-product-media img {
         transition: none;
     }
+}
+
+.dynamic-category-container .default-content-wrapper {
+    background: transparent;
+    padding: 0;
+    margin: 0;
 }
