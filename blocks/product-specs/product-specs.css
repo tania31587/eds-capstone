@@ -12,12 +12,12 @@
   border-bottom: 1px solid #e5e8e6;
 }
 
-.product-specs > div:last-child {
-  border-bottom: 0;
-}
-
 .product-specs > div > div {
   padding: 16px 20px;
+}
+
+.product-specs > div:last-child {
+  border-bottom: 0;
 }
 
 .product-specs > div > div:first-child {

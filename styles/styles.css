@@ -322,6 +322,12 @@ main > .section.pdp-top-section {
   align-items: start;
 }
 
+main > .section:not(.pdp-top-section) {
+  padding-block: 36px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
 main > .section.pdp-top-section > .product-gallery-wrapper,
 main > .section.pdp-top-section > .product-details-wrapper {
   width: 100%;
@@ -330,20 +336,11 @@ main > .section.pdp-top-section > .product-details-wrapper {
   padding: 0;
 }
 
-main > .section:not(.pdp-top-section) {
-  box-sizing: border-box;
-  width: 100%;
-}
-
 main > .section:not(.pdp-top-section) > div {
   box-sizing: border-box;
   width: min(100% - 48px, 1200px);
   max-width: 1200px;
   margin-inline: auto;
-}
-
-main > .section:not(.pdp-top-section) {
-  padding-block: 36px;
 }
 
 @media (width < 900px) {
