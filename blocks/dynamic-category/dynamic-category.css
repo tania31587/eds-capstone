@@ -12,18 +12,16 @@
 }
 
 .dynamic-category {
-  width: 100%;
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
 }
 
 .dynamic-category-header {
-    max-width: 1280px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 48px;
-    padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 40px;
+  padding-bottom: 12px;
 }
 
 .dynamic-category-eyebrow {
@@ -36,27 +34,24 @@
 }
 
 .dynamic-category-header h1 {
-    margin: 0;
-    color: #18231e;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
+  margin: 0;
+  color: #18231e;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1px;
 }
 
 .dynamic-category-count {
-    margin: 16px 0 0;
-    color: #667069;
+  margin: 0;
+  color: #666;
+  font-size: 14px;
 }
 
 .dynamic-category-grid {
-    display: grid;
-    margin-top: 16px;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 28px 22px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
 }
 
 .dynamic-category-item {
@@ -73,6 +68,7 @@
 .catalog-product-card {
     display: flex;
     height: 100%;
+    min-height: 580px;
     overflow: hidden;
     flex-direction: column;
     background-color: #fff;
@@ -91,9 +87,9 @@
 
 .catalog-product-media {
     display: block;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1/1;
     overflow: hidden;
-    background-color: #ebece6;
+    background: #f5f5f5;
 }
 
 .catalog-product-media img {
@@ -102,7 +98,6 @@
     height: 100%;
     object-fit: cover;
     background: #fff;
-    transition: transform 220ms ease;
 }
 
 .catalog-product-card:hover .catalog-product-media img {
