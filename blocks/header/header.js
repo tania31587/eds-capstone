@@ -153,7 +153,11 @@ export default async function decorate(block) {
   if (navSections) {
     const content = navSections.querySelector(':scope > .default-content-wrapper');
     const lists = content ? [...content.querySelectorAll(':scope > ul')] : [];
-    const primaryLinks = lists[0]?.querySelector(':scope > li > ul');
+    const primaryList = lists[0];
+    const primaryItems = primaryList ? [...primaryList.children] : [];
+    const primaryLinks = primaryItems.length === 1
+      ? primaryItems[0].querySelector(':scope > ul')
+      : null;
     const toolLinks = lists[1]?.querySelector(':scope > li > ul');
 
     if (primaryLinks) {

@@ -76,6 +76,7 @@ header .nav-tools .default-content-wrapper > ul {
 
 header .nav-sections li,
 header .nav-tools li {
+  position: relative;
   margin: 0;
   list-style: none;
 }
@@ -93,6 +94,49 @@ header .nav-sections a:focus-visible,
 header .nav-tools a:hover,
 header .nav-tools a:focus-visible {
   color: #237a57;
+}
+
+header .nav-sections .nav-drop {
+  padding-right: 18px;
+  cursor: pointer;
+}
+
+header .nav-sections .nav-drop::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 5px solid currentcolor;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  content: '';
+  transform: translateY(-30%);
+}
+
+header .nav-sections .nav-drop > ul {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: -16px;
+  z-index: 2;
+  display: none;
+  min-width: 180px;
+  margin: 0;
+  padding: 10px 0;
+  background: #fff;
+  border: 1px solid #e6e8e6;
+  border-radius: 8px;
+  box-shadow: 0 12px 24px rgb(16 47 37 / 12%);
+}
+
+header .nav-sections .nav-drop[aria-expanded="true"] > ul {
+  display: grid;
+}
+
+header .nav-sections .nav-drop > ul a {
+  display: block;
+  padding: 8px 16px;
+  white-space: nowrap;
 }
 
 header .nav-tools {
@@ -192,6 +236,35 @@ header .nav-hamburger {
     align-items: flex-start;
     flex-direction: column;
     gap: 16px;
+  }
+
+  header .nav-sections .nav-drop {
+    padding-right: 0;
+  }
+
+  header .nav-sections .nav-drop::after {
+    top: 12px;
+    right: -16px;
+  }
+
+  header .nav-sections .nav-drop > ul {
+    position: static;
+    min-width: 0;
+    margin-top: 10px;
+    padding: 0 0 0 16px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  header .nav-sections .nav-drop[aria-expanded="true"] > ul {
+    display: grid;
+    gap: 10px;
+  }
+
+  header .nav-sections .nav-drop > ul a {
+    padding: 0;
   }
 
   header .nav-tools {
