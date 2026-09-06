@@ -284,7 +284,7 @@
   min-height: 36px;
   align-items: center;
   padding: 0 15px;
-  color: #fff;
+  color: #fff !important;
   font-size: 0.82rem;
   font-weight: 700;
   text-decoration: none;

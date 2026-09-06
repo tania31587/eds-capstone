@@ -164,7 +164,7 @@
   min-height: 36px;
   margin-top: 8px;
   padding: 0 15px;
-  color: #fff;
+  color: #fff !important;
   font-size: 0.82rem;
   font-weight: 700;
   background: #1b5e45;

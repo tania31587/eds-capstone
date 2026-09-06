@@ -84,7 +84,7 @@
   align-items: center;
   margin-top: 28px;
   padding: 0 22px;
-  color: #fff;
+  color: #fff !important;
   font-weight: 700;
   background: #1b5e45;
   border-radius: 999px;

@@ -185,7 +185,7 @@
     justify-content: center;
     margin-top: auto;
     padding: 0 17px;
-    color: #fff;
+    color: #fff !important;
     font-size: 0.8rem;
     font-weight: 700;
     text-decoration: none;

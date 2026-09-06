@@ -42,7 +42,7 @@
   align-items: center;
   margin-top: 16px;
   padding: 0 15px;
-  color: #fff;
+  color: #fff !important;
   font-size: 0.82rem;
   font-weight: 700;
   background: #1b5e45;
