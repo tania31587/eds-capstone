@@ -146,6 +146,18 @@ main {
   width: 100%;
 }
 
+.order-success-banner {
+  box-sizing: border-box;
+  width: min(100% - 48px, 1200px);
+  margin: 24px auto 0;
+  padding: 16px 20px;
+  color: #174c36;
+  font-weight: 700;
+  background: #e8f7e9;
+  border: 1px solid #a9dcb0;
+  border-radius: 8px;
+}
+
 main > div:not(.section) {
   margin: 40px 16px;
 }

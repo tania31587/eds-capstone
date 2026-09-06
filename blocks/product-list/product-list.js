@@ -62,7 +62,12 @@ function createProductCard(product) {
   title.append(titleLink);
   content.append(title);
 
-  if (product.rating) content.append(createElement('p', 'product-list-rating', `${product.rating} ${product.reviews ? `(${product.reviews})` : ''}`));
+  if (product.rating) {
+    const rating = createElement('p', 'product-list-rating');
+    rating.append(createElement('span', 'product-list-stars', product.rating));
+    if (product.reviews) rating.append(createElement('span', 'product-list-reviews', `(${product.reviews})`));
+    content.append(rating);
+  }
   if (product.price) content.append(createElement('p', 'product-list-price', product.price));
   if (product.description) content.append(createElement('p', 'product-list-description', product.description));
 

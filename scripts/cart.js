@@ -58,6 +58,10 @@ export function removeItem(sku) {
   writeCart(getItems().filter((item) => item.sku !== sku));
 }
 
+export function clearCart() {
+  writeCart([]);
+}
+
 export function updateQty(sku, quantity) {
   const items = getItems();
   const item = items.find((cartItem) => cartItem.sku === sku);

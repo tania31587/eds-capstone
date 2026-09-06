@@ -7,6 +7,45 @@ import {
 
 const PRODUCTS_PER_PAGE = 20;
 
+function splitValues(value = '') {
+  return String(value).split(',').map((item) => item.trim()).filter(Boolean);
+}
+
+function matchesFilters(product, filters) {
+  return [...filters.entries()].every(([field, values]) => (
+    !values.size || splitValues(product[field]).some((value) => values.has(value))
+  ));
+}
+
+function createFilterGroup(label, field, products, filters, onChange) {
+  const values = [...new Set(products.flatMap((product) => splitValues(product[field])))].sort();
+  if (!values.length) return null;
+
+  const group = document.createElement('fieldset');
+  group.className = 'dynamic-category-filter-group';
+  const legend = document.createElement('legend');
+  legend.textContent = label;
+  group.append(legend);
+
+  values.forEach((value) => {
+    const option = document.createElement('label');
+    option.className = 'dynamic-category-filter-option';
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.value = value;
+    input.addEventListener('change', () => {
+      const selected = filters.get(field) || new Set();
+      if (input.checked) selected.add(value);
+      else selected.delete(value);
+      filters.set(field, selected);
+      onChange();
+    });
+    option.append(input, document.createTextNode(value));
+    group.append(option);
+  });
+  return group;
+}
+
 function createProductCard(product) {
   const item = document.createElement('li');
   item.className = 'dynamic-category-item';
@@ -183,14 +222,16 @@ function updatePageUrl(category, page) {
   window.history.replaceState({}, '', url);
 }
 
-function renderProducts(block, products, category, page) {
+function renderProducts(block, products, category, page, filters = new Map()) {
   block.textContent = '';
+
+  const visibleProducts = products.filter((product) => matchesFilters(product, filters));
 
   const validPage = Math.max(
     1,
     Math.min(
       page,
-      Math.ceil(products.length / PRODUCTS_PER_PAGE) || 1,
+      Math.ceil(visibleProducts.length / PRODUCTS_PER_PAGE) || 1,
     ),
   );
 
@@ -201,19 +242,19 @@ function renderProducts(block, products, category, page) {
 
   const eyebrow = document.createElement('p');
   eyebrow.className = 'dynamic-category-eyebrow';
-  eyebrow.textContent = 'Shop collection';
+  // eyebrow.textContent = 'Shop collection';
 
   const heading = document.createElement('h1');
   heading.textContent = category;
 
   const count = document.createElement('p');
   count.className = 'dynamic-category-count';
-  count.textContent = `${products.length} products`;
+  count.textContent = `${visibleProducts.length} products`;
 
-  header.append(eyebrow, heading, count);
+  header.append(heading, count);
 
   const start = (validPage - 1) * PRODUCTS_PER_PAGE;
-  const visibleProducts = products.slice(
+  const pageProducts = visibleProducts.slice(
     start,
     start + PRODUCTS_PER_PAGE,
   );
@@ -221,12 +262,19 @@ function renderProducts(block, products, category, page) {
   const list = document.createElement('ul');
   list.className = 'dynamic-category-grid';
 
-  visibleProducts.forEach((product) => {
+  pageProducts.forEach((product) => {
     list.append(createProductCard(product));
   });
 
+  if (!pageProducts.length) {
+    const empty = document.createElement('p');
+    empty.className = 'dynamic-category-empty';
+    empty.textContent = 'No products match the selected filters.';
+    list.append(empty);
+  }
+
   const pagination = createPagination({
-    totalProducts: products.length,
+    totalProducts: visibleProducts.length,
     currentPage: validPage,
     category,
     onPageChange: (newPage) => {
@@ -235,6 +283,7 @@ function renderProducts(block, products, category, page) {
         products,
         category,
         newPage,
+        filters,
       );
 
       block.scrollIntoView({
@@ -244,10 +293,36 @@ function renderProducts(block, products, category, page) {
     },
   });
 
-  block.append(header, list);
+  const sidebar = document.createElement('aside');
+  sidebar.className = 'dynamic-category-filters';
+  const filterHeading = document.createElement('h2');
+  filterHeading.textContent = 'Filters';
+  sidebar.append(filterHeading);
+  const render = () => renderProducts(block, products, category, 1, filters);
+  [['type', 'Plant type'], ['light', 'Light'], ['size', 'Size'], ['rating', 'Rating']].forEach(([field, label]) => {
+    const group = createFilterGroup(label, field, products, filters, render);
+    if (group) sidebar.append(group);
+  });
+  const clear = document.createElement('button');
+  clear.className = 'dynamic-category-clear';
+  clear.type = 'button';
+  clear.textContent = 'Clear filters';
+  clear.addEventListener('click', () => {
+    filters.clear();
+    render();
+  });
+  sidebar.append(clear);
+
+  const results = document.createElement('div');
+  results.className = 'dynamic-category-results';
+  results.append(header, list);
+  const layout = document.createElement('div');
+  layout.className = 'dynamic-category-layout';
+  layout.append(sidebar, results);
+  block.append(layout);
 
   if (pagination) {
-    block.append(pagination);
+    results.append(pagination);
   }
 }
 

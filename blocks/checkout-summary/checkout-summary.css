@@ -73,6 +73,41 @@
   accent-color: #237a57;
 }
 
+.checkout-place-order {
+  min-height: 48px;
+  margin-top: 12px;
+  padding: 0 22px;
+  color: #132019;
+  font-weight: 800;
+  background: #77f653;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.checkout-place-order:hover,
+.checkout-place-order:focus-visible {
+  color: #fff;
+  background: #173f2f;
+}
+
+.checkout-place-order:focus-visible {
+  outline: 3px solid #b6f2ca;
+  outline-offset: 3px;
+}
+
+.checkout-empty {
+  padding: 56px 24px;
+  text-align: center;
+  background: #f4f7f4;
+  border-radius: 8px;
+}
+
+.checkout-empty a {
+  color: #174c36;
+  font-weight: 700;
+}
+
 .checkout-order-summary {
   align-self: start;
 }

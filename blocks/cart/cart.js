@@ -2,6 +2,22 @@ import {
   formatPrice, getItems, getTotals, removeItem, updateQty,
 } from '../../scripts/cart.js';
 
+const CART_KEY = 'greenleaf-cart';
+
+export function getCart() {
+  const cart = localStorage.getItem(CART_KEY);
+
+  if (!cart) {
+    return [];
+  }
+
+  return JSON.parse(cart);
+}
+
+export function setCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
 function renderCart(block) {
   const items = getItems();
   const cart = document.createElement('div');

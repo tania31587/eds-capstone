@@ -142,6 +142,23 @@ function decorateButtons(main) {
   });
 }
 
+function showOrderSuccessBanner(doc) {
+  const serializedOrder = sessionStorage.getItem('greenleaf-order-success');
+  if (!serializedOrder || window.location.pathname !== '/') return;
+
+  sessionStorage.removeItem('greenleaf-order-success');
+  try {
+    const { name, orderNumber } = JSON.parse(serializedOrder);
+    const banner = document.createElement('aside');
+    banner.className = 'order-success-banner';
+    banner.setAttribute('role', 'status');
+    banner.textContent = `Thank you${name ? `, ${name}` : ''}. Your order ${orderNumber} has been placed.`;
+    doc.querySelector('main')?.prepend(banner);
+  } catch {
+    // Ignore malformed session data.
+  }
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -210,6 +227,7 @@ function loadDelayed() {
 
 async function loadPage() {
   await loadEager(document);
+  showOrderSuccessBanner(document);
   await loadLazy(document);
   loadDelayed();
 }

@@ -1,6 +1,7 @@
 import {
-  formatPrice, getItems, getShipping, getTotals, updateShipping,
+  clearCart, formatPrice, getItems, getShipping, getTotals, updateShipping,
 } from '../../scripts/cart.js';
+import { saveOrder } from '../../scripts/orders.js';
 
 function createInput(labelText, type, name) {
   const label = document.createElement('label');
@@ -13,7 +14,7 @@ function createInput(labelText, type, name) {
   return label;
 }
 
-function createShippingForm(onChange) {
+function createShippingForm(onChange, onSubmit) {
   const shipping = getShipping();
   const form = document.createElement('form');
   form.className = 'checkout-shipping-form';
@@ -42,12 +43,26 @@ function createShippingForm(onChange) {
     methods.append(option);
   });
   form.append(methods);
+  const submit = document.createElement('button');
+  submit.className = 'checkout-place-order';
+  submit.type = 'submit';
+  submit.textContent = 'Place Order';
+  form.append(submit);
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    onSubmit(new FormData(form));
+  });
   return form;
 }
 
 export default function decorate(block) {
   const render = () => {
     const items = getItems();
+    if (!items.length) {
+      block.innerHTML = '<p class="checkout-empty">Your cart is empty. <a href="/pages/category/shop">Continue shopping</a></p>';
+      return;
+    }
     const totals = getTotals(items);
     const checkout = document.createElement('div');
     checkout.className = 'checkout-summary-layout';
@@ -73,7 +88,27 @@ export default function decorate(block) {
     note.className = 'checkout-summary-note';
     note.textContent = 'This is a demo checkout. No payment will be collected.';
     summary.append(list, total, note);
-    checkout.append(heading, createShippingForm(render), summary);
+    const placeOrder = (formData) => {
+      const orderNumber = `GL-${Date.now().toString().slice(-6)}`;
+      const order = saveOrder({
+        id: orderNumber,
+        customer: {
+          name: formData.get('name'),
+          email: formData.get('email'),
+        },
+        items: items.map((item) => ({ ...item })),
+        total: totals.total,
+        placedAt: new Date().toISOString(),
+        status: 'Order placed',
+      });
+      sessionStorage.setItem('greenleaf-order-success', JSON.stringify({
+        name: order.customer.name,
+        orderNumber: order.id,
+      }));
+      clearCart();
+      window.location.assign('/');
+    };
+    checkout.append(heading, createShippingForm(render, placeOrder), summary);
     block.replaceChildren(checkout);
   };
 

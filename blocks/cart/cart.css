@@ -106,7 +106,7 @@
 
 .cart-checkout {
   margin-top: 10px;
-  color: #fff;
+  color: #fff !important;
   background: #173f2f;
 }
 
