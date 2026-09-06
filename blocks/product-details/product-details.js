@@ -6,6 +6,11 @@ function classifyContent(element, text) {
   if (/^[★☆]+/.test(text)) element.classList.add('product-details-rating');
   if (/reviews?$/i.test(text)) element.classList.add('product-details-reviews');
   if (/^in stock$/i.test(text)) element.classList.add('product-details-stock');
+  if (
+    text.length > 40
+    && element.querySelectorAll('p').length === 1
+    && !element.className
+  ) element.classList.add('product-details-description');
 }
 
 export default function decorate(block) {
@@ -24,10 +29,13 @@ export default function decorate(block) {
       return;
     }
 
-    const element = row.firstElementChild?.cloneNode(true) || document.createElement('p');
+    const heading = row.querySelector('h1, h2, h3, h4, h5, h6');
+    const element = (!titleFound && heading)
+      ? heading.cloneNode(true)
+      : (row.firstElementChild?.cloneNode(true) || document.createElement('p'));
     if (!row.firstElementChild) element.textContent = text;
 
-    if (!titleFound && /^h[1-6]$/.test(element.tagName.toLowerCase())) {
+    if (!titleFound && heading) {
       element.classList.add('product-details-title');
       titleFound = true;
     } else {
