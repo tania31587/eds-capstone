@@ -107,7 +107,7 @@
   line-height: 1.5;
 }
 
-.category-product-card-link {
+a.category-product-card-link {
   display: inline-flex;
   align-self: flex-start;
   min-height: 34px;
@@ -124,14 +124,14 @@
   transition: background-color 180ms ease;
 }
 
-.category-product-card-link:hover,
-.category-product-card-link:focus-visible {
+a.category-product-card-link:hover,
+a.category-product-card-link:focus-visible {
   color: #fff;
   text-decoration: none;
   background-color: #237a57;
 }
 
-.category-product-card-link:focus-visible {
+a.category-product-card-link:focus-visible {
   outline: 3px solid #b6f2ca;
   outline-offset: 3px;
 }
