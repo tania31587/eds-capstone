@@ -100,15 +100,13 @@
   justify-content: center;
   margin-top: 12px;
   padding: 0 30px;
-  color: #142019;
+  color: #fff;
   font-size: 0.95rem;
   font-weight: 700;
   text-decoration: none;
-  background-color: #77f653;
+  background-color: #1b5e45;
   border-radius: 999px;
-  transition:
-    color 180ms ease,
-    background-color 180ms ease;
+  transition: background-color 180ms ease;
 }
 
 .product-details a[href*="cart"]:hover,
@@ -116,7 +114,14 @@
 .product-details-link:hover,
 .product-details-link:focus-visible {
   color: #fff;
-  background-color: #174c36;
+  text-decoration: none;
+  background-color: #237a57;
+}
+
+.product-details a[href*="cart"]:focus-visible,
+.product-details-link:focus-visible {
+  outline: 3px solid #b6f2ca;
+  outline-offset: 3px;
 }
 
 @media (width < 900px) {

@@ -88,21 +88,25 @@
   justify-content: center;
   margin-top: 32px;
   padding: 0 26px;
-  color: #174c36;
+  color: #fff;
   font-weight: 700;
   text-decoration: none;
-  background-color: #fff;
-  border: 2px solid #fff;
+  background-color: #1b5e45;
+  border: 0;
   border-radius: 999px;
-  transition:
-    color 180ms ease,
-    background-color 180ms ease;
+  transition: background-color 180ms ease;
 }
 
 .hero-cta:hover,
 .hero-cta:focus-visible {
   color: #fff;
-  background-color: transparent;
+  text-decoration: none;
+  background-color: #237a57;
+}
+
+.hero-cta:focus-visible {
+  outline: 3px solid #b6f2ca;
+  outline-offset: 3px;
 }
 
 @media (width < 768px) {

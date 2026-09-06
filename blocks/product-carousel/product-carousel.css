@@ -69,10 +69,31 @@
 }
 
 .product-carousel-content a {
-  margin-top: 4px;
-  color: #174c36;
-  font-size: 0.86rem;
+  display: inline-flex;
+  width: fit-content;
+  min-height: 36px;
+  align-items: center;
+  margin-top: 8px;
+  padding: 0 15px;
+  color: #fff;
+  font-size: 0.82rem;
   font-weight: 700;
+  text-decoration: none;
+  background-color: #1b5e45;
+  border-radius: 999px;
+  transition: background-color 180ms ease;
+}
+
+.product-carousel-content a:hover,
+.product-carousel-content a:focus-visible {
+  color: #fff;
+  text-decoration: none;
+  background-color: #237a57;
+}
+
+.product-carousel-content a:focus-visible {
+  outline: 3px solid #b6f2ca;
+  outline-offset: 3px;
 }
 
 .product-carousel-control {

@@ -16,7 +16,9 @@ export default function decorate(block) {
   const scrollProducts = (direction) => {
     const card = track.querySelector('.product-carousel-card');
     const amount = card ? card.getBoundingClientRect().width + 24 : viewport.clientWidth;
-    viewport.scrollBy({ left: direction * amount, behavior: 'smooth' });
+    const maximum = viewport.scrollWidth - viewport.clientWidth;
+    const left = Math.max(0, Math.min(maximum, viewport.scrollLeft + (direction * amount)));
+    viewport.scrollLeft = left;
   };
   const previous = createControl('previous', () => scrollProducts(-1));
   const next = createControl('next', () => scrollProducts(1));
@@ -48,5 +50,7 @@ export default function decorate(block) {
   block.replaceChildren(previous, viewport, next);
   viewport.addEventListener('scroll', updateControls, { passive: true });
   window.addEventListener('resize', updateControls);
-  updateControls();
+  const observer = new ResizeObserver(updateControls);
+  observer.observe(viewport);
+  requestAnimationFrame(updateControls);
 }

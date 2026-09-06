@@ -119,13 +119,21 @@
   font-size: 0.82rem;
   font-weight: 700;
   text-decoration: none;
-  background-color: #17231e;
+  background-color: #1b5e45;
   border-radius: 999px;
+  transition: background-color 180ms ease;
 }
 
 .category-product-card-link:hover,
 .category-product-card-link:focus-visible {
-  background-color: #2c6f50;
+  color: #fff;
+  text-decoration: none;
+  background-color: #237a57;
+}
+
+.category-product-card-link:focus-visible {
+  outline: 3px solid #b6f2ca;
+  outline-offset: 3px;
 }
 
 @media (width < 900px) {

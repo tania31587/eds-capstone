@@ -86,8 +86,21 @@
   padding: 0 22px;
   color: #fff;
   font-weight: 700;
-  background: #237a57;
+  background: #1b5e45;
   border-radius: 999px;
+  transition: background-color 180ms ease;
+}
+
+.carousel-cta:hover,
+.carousel-cta:focus-visible {
+  color: #fff;
+  text-decoration: none;
+  background: #237a57;
+}
+
+.carousel-cta:focus-visible {
+  outline: 3px solid #b6f2ca;
+  outline-offset: 3px;
 }
 
 .carousel-control {
