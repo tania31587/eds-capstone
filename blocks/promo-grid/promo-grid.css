@@ -104,12 +104,25 @@
   justify-content: center;
   margin-top: 20px;
   padding: 0 18px;
-  color: #17231e;
+  color: #fff !important;
   font-size: 0.85rem;
   font-weight: 700;
   text-decoration: none;
-  background-color: #8cff57;
+  background-color: #1b5e45;
   border-radius: 999px;
+  transition: background-color 180ms ease;
+}
+
+.promo-card-link:hover,
+.promo-card-link:focus-visible {
+  color: #fff;
+  text-decoration: none;
+  background-color: #237a57;
+}
+
+.promo-card-link:focus-visible {
+  outline: 3px solid #b6f2ca;
+  outline-offset: 3px;
 }
 
 @media (width < 768px) {
