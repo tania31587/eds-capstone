@@ -89,6 +89,12 @@
   transition: background-color 180ms ease;
 }
 
+.product-carousel-content a {
+  color: #174c36 !important;
+  background: #fff;
+  border: 1px solid #8fcfa0;
+}
+
 .product-carousel-content a:hover,
 .product-carousel-content a:focus-visible {
   color: #174c36;
@@ -151,12 +157,6 @@
 .product-carousel-add-to-cart:hover,
 .product-carousel-add-to-cart:focus-visible {
   background: #237a57;
-}
-
-.product-carousel-content a {
-  color: #174c36 !important;
-  background: #fff;
-  border: 1px solid #8fcfa0;
 }
 
 .product-carousel-add-to-cart-quantity {

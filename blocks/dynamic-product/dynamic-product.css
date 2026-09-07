@@ -64,6 +64,15 @@
   font-size: 0.88rem;
 }
 
+.dynamic-related-product-add-to-cart-quantity span {
+  display: grid;
+  min-width: 28px;
+  place-items: center;
+  color: #174c36;
+  font-weight: 700;
+  background: #fff;
+}
+
 .dynamic-product-rating span:first-child {
   color: #e2a02b;
   letter-spacing: 0.04em;
@@ -343,15 +352,6 @@
   background: #1b5e45;
   border: 0;
   cursor: pointer;
-}
-
-.dynamic-related-product-add-to-cart-quantity span {
-  display: grid;
-  min-width: 28px;
-  place-items: center;
-  color: #174c36;
-  font-weight: 700;
-  background: #fff;
 }
 
 .dynamic-product-loading,
