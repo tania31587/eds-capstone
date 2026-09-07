@@ -1,3 +1,5 @@
+import createCardAddButton from '../../scripts/product-card.js';
+
 export default function decorate(block) {
   const list = document.createElement('div');
   list.className = 'related-products-list';
@@ -31,7 +33,18 @@ export default function decorate(block) {
         else if (!element.querySelector('a')) element.classList.add('product-card-description');
       });
       const action = content.querySelector('a');
-      if (action && action.closest('p')) action.classList.add('product-card-link');
+      if (action && action.closest('p')) {
+        action.classList.add('product-card-link');
+        const actions = document.createElement('div');
+        actions.className = 'product-card-actions';
+        actions.append(action, createCardAddButton({
+          name: title.textContent.trim(),
+          price: content.querySelector('.product-card-price')?.textContent.trim() || 0,
+          image: picture?.querySelector('img')?.src,
+          productUrl: action.href,
+        }));
+        content.append(actions);
+      }
       card.append(content);
       list.append(card);
     }

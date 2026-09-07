@@ -1,4 +1,5 @@
 import { addItem } from '../../scripts/cart.js';
+import createCardAddButton from '../../scripts/product-card.js';
 import {
   formatPrice,
   getCategoryUrl,
@@ -382,7 +383,14 @@ function createRelatedProductCard(product) {
     content.append(description);
   }
 
-  content.append(viewProduct);
+  const actions = document.createElement('div');
+  actions.className = 'dynamic-related-product-actions';
+  actions.append(viewProduct, createCardAddButton({
+    ...product,
+    sku: createProductSku(product),
+    productUrl,
+  }, 'dynamic-related-product-add-to-cart'));
+  content.append(actions);
 
   card.append(
     mediaLink,

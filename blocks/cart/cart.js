@@ -30,7 +30,7 @@ function renderCart(block) {
 
   if (!items.length) {
     const message = document.createElement('p');
-    message.textContent = 'Your cart is empty.';
+    message.innerHTML = 'Your cart is empty.<br><a href="/pages/category/shop">Continue Shopping</a>';
     content.append(message);
   } else {
     items.forEach((item) => {
@@ -44,20 +44,30 @@ function renderCart(block) {
       }
       const details = document.createElement('div');
       details.className = 'cart-item-details';
-      details.innerHTML = `<h2>${item.name}</h2><p>${formatPrice(item.price)}</p>`;
-      const unitPrice = document.createElement('p');
-      unitPrice.className = 'cart-item-unit-price';
-      unitPrice.textContent = formatPrice(item.price);
-      const quantity = document.createElement('input');
+      details.innerHTML = `<h2>${item.name}</h2><p>${formatPrice(item.price)} each</p>`;
+      const quantity = document.createElement('div');
       quantity.className = 'cart-item-quantity';
-      quantity.type = 'number';
-      quantity.min = '1';
-      quantity.value = item.quantity;
       quantity.setAttribute('aria-label', `Quantity for ${item.name}`);
-      quantity.addEventListener('change', () => {
-        updateQty(item.sku, Number(quantity.value));
+      const decrease = document.createElement('button');
+      decrease.type = 'button';
+      decrease.textContent = '−';
+      decrease.setAttribute('aria-label', `Remove one ${item.name}`);
+      const value = document.createElement('span');
+      value.textContent = item.quantity;
+      const increase = document.createElement('button');
+      increase.type = 'button';
+      increase.textContent = '+';
+      increase.setAttribute('aria-label', `Add one ${item.name}`);
+      decrease.addEventListener('click', () => {
+        if (item.quantity === 1) removeItem(item.sku);
+        else updateQty(item.sku, item.quantity - 1);
         renderCart(block);
       });
+      increase.addEventListener('click', () => {
+        updateQty(item.sku, item.quantity + 1);
+        renderCart(block);
+      });
+      quantity.append(decrease, value, increase);
       const remove = document.createElement('button');
       remove.type = 'button';
       remove.textContent = 'Remove';
@@ -69,25 +79,30 @@ function renderCart(block) {
       const lineTotal = document.createElement('strong');
       lineTotal.className = 'cart-item-total';
       lineTotal.textContent = formatPrice(item.price * item.quantity);
-      row.append(details, unitPrice, quantity, lineTotal, remove);
+      row.append(details, quantity, lineTotal, remove);
       content.append(row);
     });
   }
 
-  const totals = getTotals(items);
-  const summary = document.createElement('aside');
-  summary.className = 'cart-summary';
-  summary.innerHTML = `<h2>Order Summary</h2><p><span>Subtotal</span><strong>${formatPrice(totals.subtotal)}</strong></p><p><span>Discount</span><span>₹0</span></p><p><span>Shipping</span><span>${formatPrice(totals.shipping)}</span></p><p class="cart-total"><span>Total</span><strong>${formatPrice(totals.total)}</strong></p>`;
-  const continueShopping = document.createElement('a');
-  continueShopping.className = 'cart-continue-shopping';
-  continueShopping.href = '/pages/category/shop';
-  continueShopping.textContent = 'Continue Shopping';
-  const checkout = document.createElement('a');
-  checkout.className = 'cart-checkout';
-  checkout.href = '/pages/checkout';
-  checkout.textContent = 'Proceed to Checkout';
-  summary.append(continueShopping, checkout);
-  cart.append(content, summary);
+  if (items.length) {
+    const totals = getTotals(items);
+    const summary = document.createElement('aside');
+    summary.className = 'cart-summary';
+    summary.innerHTML = `<h2>Order Summary</h2><p><span>Subtotal</span><strong>${formatPrice(totals.subtotal)}</strong></p><p><span>Discount</span><span>₹0</span></p><p><span>Shipping</span><span>${formatPrice(totals.shipping)}</span></p><p class="cart-total"><span>Total</span><strong>${formatPrice(totals.total)}</strong></p>`;
+    const continueShopping = document.createElement('a');
+    continueShopping.className = 'cart-continue-shopping';
+    continueShopping.href = '/pages/category/shop';
+    continueShopping.textContent = 'Continue Shopping';
+    const checkout = document.createElement('a');
+    checkout.className = 'cart-checkout';
+    checkout.href = '/pages/checkout';
+    checkout.textContent = 'Proceed to Checkout';
+    summary.append(continueShopping, checkout);
+    cart.append(content, summary);
+  } else {
+    cart.classList.add('cart-layout-empty');
+    cart.append(content);
+  }
   block.replaceChildren(cart);
 }
 
