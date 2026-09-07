@@ -77,24 +77,26 @@ function buildWidgetAutoBlocks(main) {
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
-function buildAutoBlocks(main) {
+function buildAutoBlocks(main, includeFragments = true) {
   try {
-    // auto load `*/fragments/*` references
-    const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter((f) => !f.closest('.fragment'));
-    if (fragments.length > 0) {
-      // eslint-disable-next-line import/no-cycle
-      import('../blocks/fragment/fragment.js').then(({ loadFragment }) => {
-        fragments.forEach(async (fragment) => {
-          try {
-            const { pathname } = new URL(fragment.href);
-            const frag = await loadFragment(pathname);
-            fragment.parentElement.replaceWith(...frag.children);
-          } catch (error) {
-            // eslint-disable-next-line no-console
-            console.error('Fragment loading failed', error);
-          }
+    if (includeFragments) {
+      // auto load `*/fragments/*` references
+      const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter((f) => !f.closest('.fragment'));
+      if (fragments.length > 0) {
+        // eslint-disable-next-line import/no-cycle
+        import('../blocks/fragment/fragment.js').then(({ loadFragment }) => {
+          fragments.forEach(async (fragment) => {
+            try {
+              const { pathname } = new URL(fragment.href);
+              const frag = await loadFragment(pathname);
+              fragment.parentElement.replaceWith(...frag.children);
+            } catch (error) {
+              // eslint-disable-next-line no-console
+              console.error('Fragment loading failed', error);
+            }
+          });
         });
-      });
+      }
     }
     buildWidgetAutoBlocks(main);
   } catch (error) {
@@ -164,9 +166,9 @@ function showOrderSuccessBanner(doc) {
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
-export function decorateMain(main) {
+export function decorateMain(main, options = {}) {
   decorateIcons(main);
-  buildAutoBlocks(main);
+  buildAutoBlocks(main, options.includeFragments);
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);

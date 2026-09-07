@@ -1,0 +1,56 @@
+.accordion {
+  border-top: 1px solid #d8dfda;
+}
+
+.accordion > div {
+  border-bottom: 1px solid #d8dfda;
+}
+
+.accordion-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 64px;
+  padding: 16px 48px 16px 0;
+  align-items: center;
+  color: #173f2f;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.accordion-trigger::after {
+  position: absolute;
+  right: 16px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  content: '';
+  transform: rotate(45deg) translateY(-3px);
+}
+
+.accordion-trigger[aria-expanded="true"]::after {
+  transform: rotate(225deg) translate(-3px, -3px);
+}
+
+.accordion-trigger:focus-visible {
+  outline: 3px solid #b6f2ca;
+  outline-offset: -3px;
+}
+
+.accordion-panel {
+  padding: 0 48px 20px 0;
+  color: #5d6861;
+}
+
+.accordion-panel > :first-child {
+  margin-top: 0;
+}
+
+.accordion-panel > :last-child {
+  margin-bottom: 0;
+}
