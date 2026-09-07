@@ -95,7 +95,7 @@
 
 .product-list-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -193,7 +193,6 @@
 .product-list-action,
 .product-list-add-to-cart {
   min-height: 36px;
-  max-width: 90px;
   align-items: center;
   display: inline-flex;
   align-self: flex-start;
