@@ -4,53 +4,40 @@ indices:
   products:
     include:
       - /products
-    target: /query-index/products.json
 
     properties:
       name:
         select: Name
-        value: string
 
       category:
         select: Category
-        value: string
 
       image:
         select: Image
-        value: string
 
       alt:
         select: Alt
-        value: string
 
       price:
         select: Price
-        value: string
 
       description:
         select: Description
-        value: string
 
       rating:
         select: Rating
-        value: string
 
       reviews:
         select: Reviews
-        value: string
 
       type:
         select: Type
-        value: string
 
       light:
         select: Light
-        value: string
 
       size:
         select: Size
-        value: string
 
       path:
         select: Path
-        value: string
