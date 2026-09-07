@@ -322,12 +322,6 @@ main > .section.pdp-top-section {
   align-items: start;
 }
 
-main > .section:not(.pdp-top-section) {
-  padding-block: 36px;
-  box-sizing: border-box;
-  width: 100%;
-}
-
 main > .section.pdp-top-section > .product-gallery-wrapper,
 main > .section.pdp-top-section > .product-details-wrapper {
   width: 100%;

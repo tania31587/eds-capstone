@@ -18,6 +18,39 @@ function isDefaultAdobeFooter(fragment) {
   return fragment.textContent.includes('Adobe. All rights reserved.');
 }
 
+function createAuthoredFooter(fragment) {
+  const source = fragment.querySelector('.default-content-wrapper');
+  const content = document.createElement('div');
+  content.className = 'footer-content';
+  if (!source) return content;
+
+  const elements = [...source.children];
+  const brand = document.createElement('section');
+  brand.className = 'footer-brand';
+  const firstList = elements.findIndex((element) => element.tagName === 'UL');
+  elements.slice(0, firstList < 0 ? elements.length : firstList - 1).forEach((element) => brand.append(element));
+  if (brand.children.length) content.append(brand);
+
+  for (let index = Math.max(0, firstList - 1); index < elements.length; index += 1) {
+    const heading = elements[index];
+    const list = elements[index + 1];
+    if (heading?.tagName === 'P' && list?.tagName === 'UL') {
+      const section = document.createElement('section');
+      const title = document.createElement('h2');
+      title.textContent = heading.textContent;
+      section.append(title, list);
+      content.append(section);
+      index += 1;
+    } else if (heading?.tagName === 'P') {
+      const copyright = document.createElement('p');
+      copyright.className = 'footer-copyright';
+      copyright.textContent = heading.textContent;
+      content.append(copyright);
+    }
+  }
+  return content;
+}
+
 function createStorefrontFooter() {
   const content = document.createElement('div');
   content.className = 'storefront-footer';
@@ -47,20 +80,13 @@ export default async function decorate(block) {
     ? new URL(footerMetadata, window.location).pathname
     : '/footer';
 
-  const fragment = await loadFragment(footerPath);
+  const fragment = await loadFragment(footerPath, { includeFragments: false });
 
   block.textContent = '';
 
   const footerContent = isDefaultAdobeFooter(fragment)
     ? createStorefrontFooter()
-    : document.createElement('div');
-
-  if (!footerContent.className) {
-    footerContent.className = 'footer-content';
-    while (fragment.firstElementChild) {
-      footerContent.append(fragment.firstElementChild);
-    }
-  }
+    : createAuthoredFooter(fragment);
 
   footerContent.querySelectorAll('a').forEach((link) => {
     const url = new URL(link.href, window.location.origin);
