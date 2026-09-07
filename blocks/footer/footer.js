@@ -28,8 +28,14 @@ function createAuthoredFooter(fragment) {
   const brand = document.createElement('section');
   brand.className = 'footer-brand';
   const firstList = elements.findIndex((element) => element.tagName === 'UL');
-  elements.slice(0, firstList < 0 ? elements.length : firstList - 1,
-  ).forEach((element) => brand.append(element));
+  elements
+    .slice(
+      0,
+      firstList < 0 ? elements.length : firstList - 1,
+    )
+    .forEach((element) => {
+      brand.append(element);
+    });
   if (brand.children.length) content.append(brand);
 
   for (let index = Math.max(0, firstList - 1); index < elements.length; index += 1) {
