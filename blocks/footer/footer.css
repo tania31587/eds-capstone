@@ -57,8 +57,19 @@ footer .footer {
   font-size: 0.9rem;
 }
 
+.storefront-footer-bottom p {
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
 .footer-brand > p:first-child {
   margin-bottom: 8px;
+}
+
+.storefront-footer h2,
+.storefront-footer h3,
+.storefront-footer p {
+  margin: 0;
 }
 
 .footer-brand > p:first-child a {
@@ -93,12 +104,6 @@ footer .footer {
   display: grid;
   align-content: start;
   gap: 10px;
-}
-
-.storefront-footer h2,
-.storefront-footer h3,
-.storefront-footer p {
-  margin: 0;
 }
 
 .storefront-footer h2 {
@@ -145,11 +150,6 @@ footer .footer .storefront-footer a:focus-visible {
 footer .footer .storefront-footer .storefront-footer-social a {
   padding: 3px 0;
   font-weight: 700;
-}
-
-.storefront-footer-bottom p {
-  font-size: 0.72rem;
-  white-space: nowrap;
 }
 
 .storefront-footer-payments {
