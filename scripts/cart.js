@@ -32,7 +32,7 @@ export function getShipping() {
 export function getTotals(items = getItems()) {
   const quantity = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-  const shipping = getShipping().cost;
+  const shipping = items.length ? getShipping().cost : 0;
   return {
     quantity,
     subtotal,

@@ -1,3 +1,5 @@
+import createCardAddButton from '../../scripts/product-card.js';
+
 function createControl(direction, onClick) {
   const button = document.createElement('button');
   button.className = `product-carousel-control product-carousel-${direction}`;
@@ -42,6 +44,20 @@ export default function decorate(block) {
     [...row.children].forEach((cell) => {
       [...cell.children].forEach((element) => content.append(element));
     });
+    const link = content.querySelector('a');
+    if (link) {
+      const productName = content.querySelector('h2, h3, h4')?.textContent.trim() || 'Product';
+      const price = [...content.querySelectorAll('p')].find((paragraph) => /^(₹|\$|€|£)\s?\d/.test(paragraph.textContent.trim()));
+      const actions = document.createElement('div');
+      actions.className = 'product-carousel-actions';
+      actions.append(link, createCardAddButton({
+        name: productName,
+        price: price?.textContent.trim() || 0,
+        image: picture?.querySelector('img')?.src,
+        productUrl: link.href,
+      }, 'product-carousel-add-to-cart'));
+      content.append(actions);
+    }
     card.append(content);
     track.append(card);
   });

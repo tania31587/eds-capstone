@@ -4,6 +4,7 @@ import {
   getProductUrl,
   getProductsByCategory,
 } from '../../scripts/catalog.js';
+import createCardAddButton from '../../scripts/product-card.js';
 
 const PRODUCTS_PER_PAGE = 20;
 
@@ -13,8 +14,26 @@ function splitValues(value = '') {
 
 function matchesFilters(product, filters) {
   return [...filters.entries()].every(([field, values]) => (
-    !values.size || splitValues(product[field]).some((value) => values.has(value))
+    field === 'price'
+      ? (!values.min || product.price >= values.min) && (!values.max || product.price <= values.max)
+      : !values.size || splitValues(product[field]).some((value) => values.has(value))
   ));
+}
+
+function createPriceFilter(products, filters, onChange) {
+  const prices = products.map((product) => product.price).filter(Number.isFinite);
+  const group = document.createElement('fieldset');
+  group.className = 'dynamic-category-filter-group dynamic-category-price-filter';
+  group.innerHTML = `<legend>Price range</legend><div><input type="number" min="${Math.min(...prices)}" placeholder="Min" aria-label="Minimum price"><span>to</span><input type="number" max="${Math.max(...prices)}" placeholder="Max" aria-label="Maximum price"></div>`;
+  const [minimum, maximum] = group.querySelectorAll('input');
+  const selected = filters.get('price') || {};
+  minimum.value = selected.min || '';
+  maximum.value = selected.max || '';
+  [minimum, maximum].forEach((input) => input.addEventListener('change', () => {
+    filters.set('price', { min: Number(minimum.value) || 0, max: Number(maximum.value) || 0 });
+    onChange();
+  }));
+  return group;
 }
 
 function createFilterGroup(label, field, products, filters, onChange) {
@@ -33,6 +52,7 @@ function createFilterGroup(label, field, products, filters, onChange) {
     const input = document.createElement('input');
     input.type = 'checkbox';
     input.value = value;
+    input.checked = filters.get(field)?.has(value) || false;
     input.addEventListener('change', () => {
       const selected = filters.get(field) || new Set();
       if (input.checked) selected.add(value);
@@ -130,6 +150,10 @@ function createProductCard(product) {
   link.href = productUrl;
   link.textContent = 'View product';
 
+  const actions = document.createElement('div');
+  actions.className = 'catalog-product-actions';
+  actions.append(link, createCardAddButton({ ...product, productUrl }, 'catalog-product-add-to-cart'));
+
   content.append(
     category,
     title,
@@ -137,7 +161,7 @@ function createProductCard(product) {
     price,
     description,
     attributes,
-    link,
+    actions,
   );
 
   card.append(mediaLink, content);
@@ -303,6 +327,7 @@ function renderProducts(block, products, category, page, filters = new Map()) {
     const group = createFilterGroup(label, field, products, filters, render);
     if (group) sidebar.append(group);
   });
+  sidebar.append(createPriceFilter(products, filters, render));
   const clear = document.createElement('button');
   clear.className = 'dynamic-category-clear';
   clear.type = 'button';

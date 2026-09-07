@@ -64,6 +64,15 @@
   font-size: 0.88rem;
 }
 
+.dynamic-related-product-add-to-cart-quantity span {
+  display: grid;
+  min-width: 28px;
+  place-items: center;
+  color: #174c36;
+  font-weight: 700;
+  background: #fff;
+}
+
 .dynamic-product-rating span:first-child {
   color: #e2a02b;
   letter-spacing: 0.04em;
@@ -278,31 +287,71 @@
   line-height: 1.5;
 }
 
-.dynamic-related-product-card .product-card-link {
+.dynamic-related-product-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.dynamic-related-product-card .product-card-link,
+.dynamic-related-product-add-to-cart {
   display: inline-flex;
   width: fit-content;
   min-height: 36px;
   align-items: center;
   padding: 0 15px;
-  color: #fff !important;
   font-size: 0.82rem;
   font-weight: 700;
   text-decoration: none;
-  background: #1b5e45;
   border-radius: 999px;
   transition: background-color 180ms ease;
 }
 
+.dynamic-related-product-add-to-cart {
+  color: #fff;
+  background: #1b5e45;
+  border: 1px solid #1b5e45;
+  cursor: pointer;
+}
+
+.dynamic-related-product-add-to-cart:hover,
+.dynamic-related-product-add-to-cart:focus-visible {
+  background: #237a57;
+}
+
+.dynamic-related-product-card .product-card-link {
+  color: #174c36 !important;
+  background: #fff;
+  border: 1px solid #8fcfa0;
+}
+
 .dynamic-related-product-card .product-card-link:hover,
 .dynamic-related-product-card .product-card-link:focus-visible {
-  color: #fff;
+  color: #174c36;
   text-decoration: none;
-  background-color: #237a57;
+  background-color: #e8f7e9;
 }
 
 .dynamic-related-product-card .product-card-link:focus-visible {
   outline: 3px solid #b6f2ca;
   outline-offset: 3px;
+}
+
+.dynamic-related-product-add-to-cart-quantity {
+  display: flex;
+  min-height: 36px;
+  overflow: hidden;
+  border: 1px solid #1b5e45;
+  border-radius: 999px;
+}
+
+.dynamic-related-product-add-to-cart-quantity button {
+  width: 34px;
+  color: #fff;
+  background: #1b5e45;
+  border: 0;
+  cursor: pointer;
 }
 
 .dynamic-product-loading,

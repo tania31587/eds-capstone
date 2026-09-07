@@ -1,3 +1,5 @@
+import createCardAddButton from '../../scripts/product-card.js';
+
 function toSlug(value = '') {
   return value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
@@ -73,16 +75,43 @@ function createProductCard(product) {
 
   const action = createElement('a', 'product-list-action', 'View Product');
   action.href = productLink(product);
-  content.append(action);
+  const actions = createElement('div', 'product-list-actions');
+  actions.append(action, createCardAddButton({
+    sku: product.sku,
+    name: product.name || 'Product',
+    price: product.price,
+    image: imageUrl,
+    productUrl: productLink(product),
+  }, 'product-list-add-to-cart'));
+  content.append(actions);
   card.append(content);
   return card;
 }
 
 function matchesFilters(product, filters) {
   return [...filters.entries()].every(([field, values]) => {
+    if (field === 'price') {
+      const price = Number(String(product.price).replace(/[^0-9.]/g, '')) || 0;
+      return (!values.min || price >= values.min) && (!values.max || price <= values.max);
+    }
     if (!values.size) return true;
     return splitValues(product[field]).some((value) => values.has(value));
   });
+}
+
+function createPriceFilter(products, filters, onChange) {
+  const prices = products.map((product) => Number(String(product.price).replace(/[^0-9.]/g, '')) || 0);
+  const group = createElement('fieldset', 'product-list-filter-group product-list-price-filter');
+  group.innerHTML = `<legend>Price range</legend><div><input type="number" min="${Math.min(...prices)}" placeholder="Min" aria-label="Minimum price"><span>to</span><input type="number" max="${Math.max(...prices)}" placeholder="Max" aria-label="Maximum price"></div>`;
+  const [minimum, maximum] = group.querySelectorAll('input');
+  const selected = filters.get('price') || {};
+  minimum.value = selected.min || '';
+  maximum.value = selected.max || '';
+  [minimum, maximum].forEach((input) => input.addEventListener('change', () => {
+    filters.set('price', { min: Number(minimum.value) || 0, max: Number(maximum.value) || 0 });
+    onChange();
+  }));
+  return group;
 }
 
 function createFilterGroup(label, field, products, filters, onChange) {
@@ -144,6 +173,7 @@ export default async function decorate(block) {
       const filter = createFilterGroup(label, field, products, filters, render);
       if (filter) sidebar.append(filter);
     });
+    sidebar.append(createPriceFilter(products, filters, render));
 
     const clearButton = createElement('button', 'product-list-clear', 'Clear filters');
     clearButton.type = 'button';

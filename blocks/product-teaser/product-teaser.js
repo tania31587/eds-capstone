@@ -1,3 +1,5 @@
+import createCardAddButton from '../../scripts/product-card.js';
+
 export default function decorate(block) {
   const picture = block.querySelector('picture');
   const heading = block.querySelector('h2, h3, h4');
@@ -43,7 +45,15 @@ export default function decorate(block) {
 
   if (link) {
     link.classList.add('product-card-link');
-    content.append(link);
+    const actions = document.createElement('div');
+    actions.className = 'product-card-actions';
+    actions.append(link, createCardAddButton({
+      name: heading?.textContent.trim() || 'Product',
+      price: price?.textContent.trim() || 0,
+      image: picture?.querySelector('img')?.src,
+      productUrl: link.href,
+    }));
+    content.append(actions);
   }
 
   card.append(content);
