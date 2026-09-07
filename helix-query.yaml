@@ -17,3 +17,11 @@ indices:
       path:
         select: none
         value: path
+
+      title:
+        select: title
+        value: textContent(el)
+
+      description:
+        select: meta[name="description"]
+        value: attribute(el, "content")
