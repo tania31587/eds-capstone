@@ -2,7 +2,7 @@ version: 1
 
 sitemaps:
   default:
-    origin: https://main--eds-boilerplate--tania31587.aem.page
+    origin: https://main--eds-capstone--tania31587.aem.page
 
     source: /query-index.json
 
