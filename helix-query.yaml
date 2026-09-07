@@ -1,43 +1,31 @@
 version: 1
 
 indices:
-  products:
+  default:
     include:
-      - /products
+      - /**
+
+    exclude:
+      - /nav/**
+      - /footer/**
+      - /fragments/**
+      - /drafts/**
+
+    target: /query-index.json
 
     properties:
-      name:
-        select: Name
+      path:
+        select: none
+        value: path
 
-      category:
-        select: Category
-
-      image:
-        select: Image
-
-      alt:
-        select: Alt
-
-      price:
-        select: Price
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
 
       description:
-        select: Description
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
 
-      rating:
-        select: Rating
-
-      reviews:
-        select: Reviews
-
-      type:
-        select: Type
-
-      light:
-        select: Light
-
-      size:
-        select: Size
-
-      path:
-        select: Path
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, "content")
