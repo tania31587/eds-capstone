@@ -19,9 +19,13 @@ indices:
         value: path
 
       title:
-        select: title
-        value: textContent(el)
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
 
       description:
-        select: meta[name="description"]
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+
+      image:
+        select: head > meta[property="og:image"]
         value: attribute(el, "content")
