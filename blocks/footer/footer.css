@@ -62,14 +62,14 @@ footer .footer {
   white-space: nowrap;
 }
 
-.footer-brand > p:first-child {
-  margin-bottom: 8px;
-}
-
 .storefront-footer h2,
 .storefront-footer h3,
 .storefront-footer p {
   margin: 0;
+}
+
+.footer-brand > p:first-child {
+  margin-bottom: 8px;
 }
 
 .footer-brand > p:first-child a {
