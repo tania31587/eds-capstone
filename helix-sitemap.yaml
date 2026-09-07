@@ -1,18 +1,9 @@
+version: 1
+
 sitemaps:
   default:
-    origin: https://feature--eds-capstone--tania31587.aem.live
+    origin: https://main--eds-boilerplate--tania31587.aem.page
 
-    source:
-      type: query-index
-      query: /query-index/products.json
+    source: /query-index.json
 
-    lastmod: YYYY-MM-DD
-
-    exclude:
-      - /cart
-      - /checkout
-      - /account
-
-    languages:
-      default:
-        source: /query-index/products.json
+    destination: /sitemap.xml
