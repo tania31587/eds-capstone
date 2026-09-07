@@ -95,19 +95,20 @@
   min-height: 36px;
   align-items: center;
   padding: 0 15px;
-  color: #fff !important;
   font-size: 0.82rem;
   font-weight: 700;
   text-decoration: none;
-  background: #1b5e45;
+  color: #174c36;
+  background: #fff;
+  border: 1px solid #8fcfa0;
   border-radius: 999px;
   transition: background-color 180ms ease;
 }
 
 .related-products .product-card-add-to-cart {
-  color: #174c36;
-  background: #e8f7e9;
-  border: 1px solid #8fcfa0;
+  color: #fff;
+  background: #1b5e45;
+  border: 1px solid #1b5e45;
   cursor: pointer;
 }
 
@@ -120,7 +121,7 @@
 .related-products a.product-card-link:focus-visible {
   color: #fff;
   text-decoration: none;
-  background-color: #237a57;
+  background-color: #e8f7e9;
 }
 
 .related-products a.product-card-link:focus-visible {
